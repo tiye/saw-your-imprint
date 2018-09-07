@@ -3,30 +3,34 @@ import _ from "lodash";
 import { parseRoutePath, IRouteParseResult } from "ruled-router";
 import { css } from "emotion";
 
-import data from "../data";
+import { IGlobalStore } from "model/global";
+import YearView from "./year-view";
+import Article from "./article";
 
-export default (props) => {
-  let pairs = _.toPairs(data).map(([title, content]) => {
-    return [title.slice(0, 10), { title: title.slice(10), content }];
-  });
-  let dict = _.fromPairs(pairs);
+interface IProps {
+  store: IGlobalStore;
+  router: IRouteParseResult;
+}
 
-  console.log(dict);
-  return (
-    <div className={styleContainer}>
-      <div className={styleTitle}>
-        {pairs.map((x) => x[0]).map((x, idx) => {
-          return <div key={idx}>{x}</div>;
-        })}
-      </div>
-    </div>
-  );
-};
+interface IState {}
+
+export default class Container extends React.Component<IProps, IState> {
+  render() {
+    return <div className={styleContainer}>{this.renderPage(this.props.store)}</div>;
+  }
+
+  renderPage(store: IGlobalStore) {
+    switch (store.router.name) {
+      case "home":
+        return <YearView dict={store.dict} />;
+      case "article":
+        return <Article />;
+      default:
+        return <div>Unknown page {store.router.name}</div>;
+    }
+  }
+}
 
 const styleContainer = css`
   font-family: "Helvetica";
-`;
-
-const styleTitle = css`
-  margin-bottom: 16px;
 `;

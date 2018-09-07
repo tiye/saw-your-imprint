@@ -1,19 +1,23 @@
-import ReactDOM, { unstable_renderSubtreeIntoContainer } from "react-dom";
+import ReactDOM from "react-dom";
 import React from "react";
 
 import { parseRoutePath, IRouteParseResult } from "ruled-router";
 
-import { routerRules } from "./models/router-rules";
+import { routerRules } from "./model/router-rules";
 
 import Container from "./pages/container";
+import { globalStore } from "store";
 
 const renderApp = () => {
   let routerTree = parseRoutePath(window.location.hash.slice(1), routerRules);
 
-  ReactDOM.render(<Container router={routerTree} />, document.querySelector(".app"));
+  ReactDOM.render(<Container router={routerTree} store={globalStore.getState()} />, document.querySelector(".app"));
 };
 
-window.onload = renderApp;
+window.onload = () => {
+  renderApp();
+  globalStore.subscribe(renderApp);
+};
 
 window.addEventListener("hashchange", () => {
   renderApp();
