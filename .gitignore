@@ -8,4 +8,4 @@ dist/
 .DS_Store
 *.swp
 *.log
-src/*.json
+src/data.tsx
