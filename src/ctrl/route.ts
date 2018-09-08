@@ -9,3 +9,7 @@ export function routePage(name, data) {
     };
   });
 }
+
+export function routePath(path: string) {
+  location.hash = path;
+}

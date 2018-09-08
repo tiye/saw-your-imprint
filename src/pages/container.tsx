@@ -20,13 +20,15 @@ export default class Container extends React.Component<IProps, IState> {
   }
 
   renderPage(store: IGlobalStore) {
-    switch (store.router.name) {
+    let router = this.props.router;
+
+    switch (router.name) {
       case "home":
         return <YearView dict={store.dict} />;
       case "article":
-        return <Article />;
+        return <Article article={store.dict[router.data.date]} />;
       default:
-        return <div>Unknown page {store.router.name}</div>;
+        return <div>Unknown page {router.name}</div>;
     }
   }
 }

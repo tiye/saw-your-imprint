@@ -17,18 +17,12 @@ export interface IArticlesDict {
 
 export interface IGlobalStore {
   schemaVersion: string;
-  router: {
-    name: string;
-    data: any;
-  };
+
   dict: IArticlesDict;
 }
 
 export let initialStore: IGlobalStore = {
   schemaVersion: "0.1",
-  router: {
-    name: "home",
-    data: null,
-  },
+
   dict: postsDict,
 };
