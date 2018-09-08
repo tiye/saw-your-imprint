@@ -23,10 +23,13 @@ export default class Container extends React.Component<IProps, IState> {
     let router = this.props.router;
 
     switch (router.name) {
-      case "home":
-        return <YearView dict={store.dict} />;
+      case "year":
+        console.log("year page", router);
+
+        let selectedYear = (router.data != null ? router.data.year : null) || "2018";
+        return <YearView dict={store.dict} selected={selectedYear} />;
       case "article":
-        return <Article article={store.dict[router.data.date]} />;
+        return <Article article={store.dict[router.data.date]} dateString={router.data.date as string} />;
       default:
         return <div>Unknown page {router.name}</div>;
     }
