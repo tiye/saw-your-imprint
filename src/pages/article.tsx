@@ -11,7 +11,7 @@ import hsl from "hsl";
 import { routeBack } from "ctrl/route";
 
 var reader = new commonmark.Parser();
-var writer = new commonmark.HtmlRenderer({ softbreak: "<br />" } as any);
+var writer = new commonmark.HtmlRenderer();
 
 interface IProps {
   dateString: string;

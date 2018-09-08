@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Ref } from "react";
 import prodoce, { produce } from "immer";
 import _ from "lodash";
 import { cx, css } from "emotion";
@@ -20,14 +20,20 @@ interface IProps {
 
 interface IState {}
 
-let years = [2018, 2017, 2016, 2015, , ,];
+let years = [2018, 2017, 2016, 2015];
 
 let today = DateTime.local();
 
+let _cachedScroll = 0;
+
 export default class YearView extends React.Component<IProps, IState> {
+  refMonths: any;
+
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.refMonths = React.createRef();
   }
 
   immerState(f: (s: IState) => void, cb?) {
@@ -69,7 +75,7 @@ export default class YearView extends React.Component<IProps, IState> {
     let counted = Object.keys(this.props.dict).filter((x) => x.startsWith(year.toString())).length;
 
     return (
-      <div className={cx(flex, styleYearPage)}>
+      <div className={cx(flex, styleYearPage)} ref={this.refMonths}>
         <div className={styleYearReview}>{`${counted} posts in this year`}</div>
         <div className={cx(styleMonthTable)}>
           {_.sortBy(_.range(1, 13), (x) => -x).map((m) => {
@@ -145,6 +151,14 @@ export default class YearView extends React.Component<IProps, IState> {
       </>
     );
   }
+
+  componentDidMount() {
+    this.refMonths.current.scrollTop = _cachedScroll;
+  }
+
+  componentWillUnmount() {
+    _cachedScroll = this.refMonths.current.scrollTop;
+  }
 }
 
 const styleDayCell = css`
@@ -212,7 +226,7 @@ const styleHasArticle = css`
 `;
 
 const styleContent = css`
-  max-width: 1200px;
+  /* max-width: 1200px; */
   height: 100%;
   margin: 0 auto;
 `;

@@ -20,6 +20,6 @@ Promise.all(ps)
 	data = {}
 	result.forEach ([path, content]) ->
 		data[path] = content
-		fs.writeFileSync 'src/data.tsx', "export default #{JSON.stringify(data, null, 2)}"
+		fs.writeFileSync 'src/data.ts', "export default #{JSON.stringify(data, null, 2)}"
 .catch (error) ->
 	console.log error
