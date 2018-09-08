@@ -24,8 +24,6 @@ export default class Container extends React.Component<IProps, IState> {
 
     switch (router.name) {
       case "year":
-        console.log("year page", router);
-
         let selectedYear = (router.data != null ? router.data.year : null) || "2018";
         return <YearView dict={store.dict} selected={selectedYear} />;
       case "article":
@@ -37,5 +35,5 @@ export default class Container extends React.Component<IProps, IState> {
 }
 
 const styleContainer = css`
-  font-family: "Helvetica";
+  font-family: Hind, Verdana, "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif;
 `;

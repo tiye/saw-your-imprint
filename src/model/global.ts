@@ -1,5 +1,5 @@
 import _ from "lodash";
-import data from "../data";
+import data from "../data"; // {[date:strig]: string}
 
 let postsPairs = _.toPairs(data).map(([title, content]) => {
   return [title.slice(0, 10), { title: title.slice(10), content }];

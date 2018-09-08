@@ -10,7 +10,8 @@ import { DateTime } from "luxon";
 import Space from "kit/space";
 import { routePath } from "ctrl/route";
 import hsl from "hsl";
-import comparisonData from "../comparison";
+import comparisonData from "../comparison"; // {[date:strig]: string}
+import specials from "../specials"; // string[]
 
 interface IProps {
   dict: IArticlesDict;
@@ -109,11 +110,12 @@ export default class YearView extends React.Component<IProps, IState> {
 
           let aDayString = thisDay.minus({ years: 5 }).toFormat("yyyy-MM-dd");
           let hasComparison = comparisonData.includes(aDayString);
-          console.log(aDayString, hasComparison);
+
+          let isSpecial = specials.includes(thisDay.toFormat("MM-dd"));
 
           return (
             <div
-              className={cx(center, styleDayCell, hasArticle ? styleHasArticle : null)}
+              className={cx(center, styleDayCell, hasArticle ? styleHasArticle : null, isSpecial ? styleSpecial : null)}
               key={d}
               onClick={() => {
                 if (hasArticle) {
@@ -237,4 +239,8 @@ const styleComparison = css`
   right: 4px;
   bottom: 8px;
   position: absolute;
+`;
+
+const styleSpecial = css`
+  cursor: wait;
 `;

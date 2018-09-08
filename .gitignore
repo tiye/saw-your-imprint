@@ -10,3 +10,4 @@ dist/
 *.log
 src/data.ts
 src/comparison.ts
+src/specials.ts
