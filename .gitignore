@@ -11,3 +11,4 @@ dist/
 src/data.ts
 src/comparison.ts
 src/specials.ts
+*.zip

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --hot",
-    "watch": "webpack-dev-server --hot",
+    "dev": "yarn watch",
+    "watch": "webpack-dev-server --hot --hot-only",
     "release": "rm -rf dist/* && webpack --progress --config webpack.release.js",
     "build": "yarn release",
     "serve": "http-server dist/ -s",

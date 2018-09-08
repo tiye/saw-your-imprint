@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  entry: ["./src/main.tsx"],
+  entry: ["webpack-hud", "./src/main.tsx"],
   output: {
     filename: "index.js",
     path: path.join(__dirname, "/dist"),
