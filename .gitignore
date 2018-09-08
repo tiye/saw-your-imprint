@@ -8,4 +8,5 @@ dist/
 .DS_Store
 *.swp
 *.log
-src/data.tsx
+src/data.ts
+src/comparison.ts

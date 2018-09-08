@@ -33,6 +33,7 @@
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "ruled-router": "^0.2.2",
+    "shelljs": "^0.8.2",
     "style-loader": "^0.23.0",
     "typescript": "^3.0.1",
     "typescript-styled-plugin": "^0.10.0",

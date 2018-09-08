@@ -10,6 +10,7 @@ import { DateTime } from "luxon";
 import Space from "kit/space";
 import { routePath } from "ctrl/route";
 import hsl from "hsl";
+import comparisonData from "../comparison";
 
 interface IProps {
   dict: IArticlesDict;
@@ -106,6 +107,10 @@ export default class YearView extends React.Component<IProps, IState> {
           let dayInString = thisDay.toFormat("yyyy-MM-dd");
           let hasArticle = this.props.dict[dayInString] != null;
 
+          let aDayString = thisDay.minus({ years: 5 }).toFormat("yyyy-MM-dd");
+          let hasComparison = comparisonData.includes(aDayString);
+          console.log(aDayString, hasComparison);
+
           return (
             <div
               className={cx(center, styleDayCell, hasArticle ? styleHasArticle : null)}
@@ -117,6 +122,7 @@ export default class YearView extends React.Component<IProps, IState> {
               }}
             >
               {d}
+              {hasComparison ? <div className={styleComparison} /> : null}
             </div>
           );
         })}
@@ -141,10 +147,12 @@ export default class YearView extends React.Component<IProps, IState> {
 
 const styleDayCell = css`
   width: 32px;
-  line-height: 32px;
+  line-height: 30px;
   color: #444;
   font-size: 14px;
   color: ${hsl(240, 0, 70)};
+  border-radius: 16px;
+  position: relative;
 `;
 
 const styleWeekRow = css`
@@ -191,12 +199,12 @@ const styleMonthName = css`
 `;
 
 const styleHeaderCell = css`
-  color: #ccc;
+  color: ${hsl(0, 0, 90)};
 `;
 
 const styleHasArticle = css`
   background-color: hsl(10, 80%, 80%);
-  border-radius: 16px;
+
   color: white;
   cursor: pointer;
 `;
@@ -217,4 +225,16 @@ const styleYearReview = css`
   font-weight: 300;
   color: #aaa;
   margin-bottom: 40px;
+`;
+
+let dotSize = 4;
+
+const styleComparison = css`
+  width: ${dotSize}px;
+  height: ${dotSize}px;
+  border-radius: ${dotSize / 2}px;
+  background-color: ${hsl(200, 90, 70, 0.6)};
+  right: 4px;
+  bottom: 8px;
+  position: absolute;
 `;
